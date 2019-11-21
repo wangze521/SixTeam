@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container-fluid">
+    <form id="myForm">
+        <div class="row">
+            <div class="col-md-2">
+                <label for="peopleNum">成员账号</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="peopleNum" id="peopleNum" placeholder="请输入账号">
+            </div>
+            <div class="col-md-2">
+                <label for="peopleName">成员名称</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="peopleName" id="peopleName" placeholder="请输入名称">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label>邮箱地址</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="email">
+            </div>
+            <div class="col-md-2">
+                <label>登录密码</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control date" name="adminPassword">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label>所属部门</label>
+            </div>
+            <div class="col-md-4">
+                <select name="deptId" id="searchDept2" class="form-control">
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+<script>
+    $(function(){
+        initSearchDept();
+    })
+    function initSearchDept() {
+        $.ajax({
+            url:'../findDeptList',
+            data:null,
+            success:function(data){
+                var str = "<option value='0'>--请选择--<option>";
+                for(var i=0;i<data.length;i++){
+                    str+="<option value='"+data[i].deptId+"'>"+data[i].deptName+"<option>"
+                }
+                $("#searchDept2").html(str);
+            }
+        })
+    }
+</script>
+</html>

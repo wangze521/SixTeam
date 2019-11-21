@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/management" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/provider_fwt" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/provider_lmy" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/provider_lpb" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/provider_sjn" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/provider_wz" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/provider_xmy" charset="UTF-8" />
+  </component>
+</project>

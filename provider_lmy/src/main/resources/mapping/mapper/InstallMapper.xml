@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.mapper.InstaModelMapper" >
+    <resultMap id="BaseResultMap" type="com.jk.model.InstaModel" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="platformName" property="platformname" jdbcType="VARCHAR" />
+        <result column="platformHeadline" property="platformheadline" jdbcType="VARCHAR" />
+        <result column="platformDescription" property="platformdescription" jdbcType="VARCHAR" />
+        <result column="keyWord" property="keyword" jdbcType="VARCHAR" />
+        <result column="platformLogd" property="platformlogd" jdbcType="VARCHAR" />
+        <result column="customerHotline" property="customerhotline" jdbcType="VARCHAR" />
+        <result column="customerMailbox" property="customermailbox" jdbcType="VARCHAR" />
+        <result column="configuration" property="configuration" jdbcType="VARCHAR" />
+        <result column="pid" property="pid" jdbcType="INTEGER" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+    id, platformName, platformHeadline, platformDescription, keyWord, platformLogd, customerHotline,
+    customerMailbox, configuration, pid
+  </sql>
+
+    <insert id="addInstall" parameterType="com.jk.model.InstaModel" >
+    insert into lmy_install (id, platformName, platformHeadline,
+      platformDescription, keyWord, platformLogd,
+      customerHotline, customerMailbox, configuration,
+      pid)
+    values (#{id,jdbcType=INTEGER}, #{platformname,jdbcType=VARCHAR}, #{platformheadline,jdbcType=VARCHAR},
+      #{platformdescription,jdbcType=VARCHAR}, #{keyword,jdbcType=VARCHAR}, #{platformlogd,jdbcType=VARCHAR},
+      #{customerhotline,jdbcType=VARCHAR}, #{customermailbox,jdbcType=VARCHAR}, #{configuration,jdbcType=VARCHAR},
+      #{pid,jdbcType=INTEGER})
+  </insert>
+
+    <select id="findCount" resultType="int">
+        select count(1) from lmy_install t
+
+    </select>
+    <select id="queryInstall" resultType="com.jk.model.InstaModel" >
+       /* select
+            *
+        from lmy_install t
+         LEFT JOIN login_user a ON t.pid=a.uid*/
+
+
+    /*select * from login_user u LEFT JOIN lmy_install l on u.uid=l.pid*/
+
+       select * from lmy_install
+
+    </select>
+
+<!--
+
+    <update id="lmyquery" parameterType="com.jk.model.InstaModel">
+		update lmy_install t set t.platformname=#{platformname},t.platformheadline=#{platformheadline},t.platformdescription=#{platformdescription},t.keyword=#{keyword},
+	t.platformlogd = #{platformlogd},t.customerhotline=#{customerhotline},t.customermailbox=#{customermailbox},t.configuration=#{configuration} where t.id = #{id}
+	</update>
+
+-->
+  <update id="findByid" parameterType="com.jk.model.InstaModel">
+
+   update lmy_install l left join login_user u on l.pid = u.uid set
+   l.platformName=#{lmy.platformname},
+   l.platformHeadline=#{lmy.platformheadline},
+   l.platformDescription = #{lmy.platformdescription},
+   l.keyWord = #{lmy.keyword},
+   l.platformLogd=#{lmy.platformlogd},
+   l.customerHotline=#{lmy.customerhotline},
+   l.customerMailbox=#{lmy.customermailbox},
+   l.configuration=#{lmy.configuration}
+    where u.uid = #{lmy.id}
+
+    </update>
+ <!--   <update id="findByid" parameterType="com.jk.model.InstaModel">
+
+   update lmy_install l set
+   l.platformName=#{platformname},
+   l.platformHeadline=#{platformheadline},
+   l.platformDescription = #{platformdescription},
+   l.keyWord = #{keyword},
+   l.platformLogd=#{platformlogd},
+   l.customerHotline=#{customerhotline},
+   l.customerMailbox=#{customermailbox},
+   l.configuration=#{configuration}
+    where l.id = #{id}
+
+    </update>-->
+
+
+
+
+
+
+
+
+
+   <select id="lmyquery1" resultType="com.jk.model.InstaModel" >
+
+
+
+select * from login_user u LEFT JOIN lmy_install l on u.uid=l.pid where u.uid=#{id}
+
+
+
+    </select>
+
+
+
+
+
+
+</mapper>

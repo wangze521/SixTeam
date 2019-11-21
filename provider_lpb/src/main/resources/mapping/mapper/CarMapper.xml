@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.mapper.LpbMapper" >
+  <resultMap id="BaseResultMap" type="com.jk.model.LpbSheng" >
+  </resultMap>
+
+  <select id="lpbquery" resultType="com.jk.model.LpbSheng" >
+
+  select p.jiamengshu ,p.id ,p.sheng,p.zonghefen ,p.pid from  lpb_province p  LEFT JOIN lpb_shi l on p.pid=l.shiid where
+
+    p.typeid=#{id}
+
+      <if test="sheng !=null and sheng !=''">
+          and p.lianid = #{sheng}
+      </if>
+
+   group by p.zonghefen
+     <!-- <include refid="aa"></include>-->
+
+  </select>
+
+
+  <select id="queryQu" resultType="com.jk.model.LpbSheng" >
+
+   SELECT * from lpb_province a where a.typeid = 2
+
+  </select>
+
+
+
+  <select id="Lpbquerylogin" resultType="com.jk.model.UserBean" >
+
+       select * from login_user where uid=#{id}
+
+    </select>
+
+    <update id="Lpbadd" parameterType="com.jk.model.UserModel">
+
+    update login_user
+    set uname = #{uname,jdbcType=VARCHAR},
+      upassword = #{upassword,jdbcType=VARCHAR},
+      dateTime = #{datetime,jdbcType=DATE},
+      phone = #{phone,jdbcType=VARCHAR}
+    where uid = #{uid,jdbcType=INTEGER}
+	</update>
+
+
+
+
+</mapper>

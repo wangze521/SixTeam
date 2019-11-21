@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.mapper.TianBaoMapper" >
+  <resultMap id="BaseResultMap" type="com.jk.model.Sjn.TianBao" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="sheng" property="sheng" jdbcType="VARCHAR" />
+    <result column="shi" property="shi" jdbcType="VARCHAR" />
+    <result column="qu" property="qu" jdbcType="VARCHAR" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="wdtb" property="wdtb" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, sheng, shi, qu, company, status, wdtb
+  </sql>
+
+  <select id="queryById" resultType="com.jk.model.Sjn.Sc">
+select sc.id,s.sname as sname,h.hname as hname,q.qname as qname,sc.company ,sc.sdate as sdate,sc.price,g.gsname as gsname,sta.statusname as statusname ,sc.simg,sc.far,sc.farsfz,sc.mianji,sc.hwy,sc.bgry,c.cdname from sjn_sc sc
+			left join sjn_sheng s on  sc.sheng=s.id
+			left join sjn_shi h on sc.shi = h.id
+			left join sjn_qu q on sc.qu =q.id
+			LEFT JOIN sjn_gs g on sc.stype=g.id
+			LEFT JOIN sjn_cd c on sc.cdsx=c.id
+LEFT JOIN sjn_status sta on sc.`status`=sta.id
+where sc.id=#{id}
+  </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <select id="findCount" resultType="int">
+    select count(1) from sjn_sc
+
+  </select>
+  <select id="findList" resultType="com.jk.model.Sjn.Sc">
+select sc.id,s.sname as sname,h.hname as hname,q.qname as qname,sc.company ,sc.sdate as sdate,sc.price,g.gsname as gsname,sta.statusname as statusname ,sc.simg,sc.far,sc.farsfz,sc.mianji,sc.hwy,sc.bgry,c.cdname from sjn_sc sc
+			left join sjn_sheng s on  sc.sheng=s.id
+			left join sjn_shi h on sc.shi = h.id
+			left join sjn_qu q on sc.qu =q.id
+			LEFT JOIN sjn_gs g on sc.stype=g.id
+			LEFT JOIN sjn_cd c on sc.cdsx=c.id
+LEFT JOIN sjn_status sta on sc.`status`=sta.id
+GROUP BY sc.id
+
+    limit #{start},#{rows}
+  </select>
+
+  <select id="findCounttwo" resultType="int">
+    select count(1) from sjn_sc
+
+  </select>
+  <select id="tgsh" resultType="com.jk.model.Sjn.Sc">
+ select sc.id,s.sname as sname,h.hname as hname,q.qname as qname,sc.company ,sc.sdate as sdate,sc.price,g.gsname as gsname,sta.statusname as statusname ,sc.simg,sc.far,sc.farsfz,sc.mianji,sc.hwy,sc.bgry,c.cdname from sjn_sc sc
+			left join sjn_sheng s on  sc.sheng=s.id
+			left join sjn_shi h on sc.shi = h.id
+			left join sjn_qu q on sc.qu =q.id
+			LEFT JOIN sjn_gs g on sc.stype=g.id
+			LEFT JOIN sjn_cd c on sc.cdsx=c.id
+LEFT JOIN sjn_status sta on sc.`status`=sta.id
+			where sc.`status`=1
+GROUP BY sc.id
+
+  </select>
+
+  <select id="findCountthree" resultType="int">
+    select count(1) from sjn_sc
+
+  </select>
+  <select id="ytgwsh" resultType="com.jk.model.Sjn.Sc">
+select sc.id,s.sname as sname,h.hname as hname,q.qname as qname,sc.company ,sc.sdate as sdate,sc.price,g.gsname as gsname,sta.statusname as statusname ,sc.simg,sc.far,sc.farsfz,sc.mianji,sc.hwy,sc.bgry,c.cdname from sjn_sc sc
+			left join sjn_sheng s on  sc.sheng=s.id
+			left join sjn_shi h on sc.shi = h.id
+			left join sjn_qu q on sc.qu =q.id
+			LEFT JOIN sjn_gs g on sc.stype=g.id
+			LEFT JOIN sjn_cd c on sc.cdsx=c.id
+LEFT JOIN sjn_status sta on sc.`status`=sta.id
+			where sc.`status`=2
+GROUP BY sc.id
+
+  </select>
+
+
+
+  <select id="findCountfour" resultType="int">
+    select count(1) from sjn_sc
+
+  </select>
+  <select id="wsh" resultType="com.jk.model.Sjn.Sc">
+select sc.id,s.sname as sname,h.hname as hname,q.qname as qname,sc.company ,sc.sdate as sdate,sc.price,g.gsname as gsname,sta.statusname as statusname ,sc.simg,sc.far,sc.farsfz,sc.mianji,sc.hwy,sc.bgry,c.cdname from sjn_sc sc
+			left join sjn_sheng s on  sc.sheng=s.id
+			left join sjn_shi h on sc.shi = h.id
+			left join sjn_qu q on sc.qu =q.id
+			LEFT JOIN sjn_gs g on sc.stype=g.id
+			LEFT JOIN sjn_cd c on sc.cdsx=c.id
+LEFT JOIN sjn_status sta on sc.`status`=sta.id
+
+			where sc.`status`=3
+GROUP BY sc.id
+
+  </select>
+
+  <update id="xiuthree" parameterType="com.jk.model.Sjn.Sc" >
+    update sjn_sc
+    set
+      status = 1
+    where id = #{id}
+  </update>
+
+  <update id="xiutwo" parameterType="com.jk.model.Sjn.Sc" >
+    update sjn_sc
+    set
+      status = 2
+    where id = #{id}
+  </update>
+
+
+
+
+
+
+
+
+
+
+  <select id="getlx"  resultType="com.jk.model.Sjn.Sc">
+		select * from sjn_sc
+	</select>
+  <select id="querySheng"  resultType="com.jk.model.Sjn.Sheng">
+		select * from sjn_sheng
+	</select>
+  <select id="getshi"  resultType="com.jk.model.Sjn.Shi">
+		select * from sjn_shi  where id=#{pid}
+	</select>
+  <select id="getqu"  resultType="com.jk.model.Sjn.Qu">
+		select * from sjn_qu  where id=#{pid}
+	</select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sjn_sc
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+
+
+
+  <insert id="add" parameterType="com.jk.model.Sjn.Sc" >
+    insert into sjn_sc (id, sheng, shi,
+      qu, company, status,
+      price, stype, sdate,
+      simg, far, mianji,
+      farsfz, hwy, bgry,
+      cdsx)
+    values (#{id,jdbcType=INTEGER}, #{sheng,jdbcType=VARCHAR}, #{shi,jdbcType=VARCHAR},
+      #{qu,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
+      #{price,jdbcType=VARCHAR}, #{stype,jdbcType=VARCHAR}, #{sdate,jdbcType=TIMESTAMP},
+      #{simg,jdbcType=VARCHAR}, #{far,jdbcType=VARCHAR}, #{mianji,jdbcType=VARCHAR},
+      #{farsfz,jdbcType=VARCHAR}, #{hwy,jdbcType=VARCHAR}, #{bgry,jdbcType=VARCHAR},
+      #{cdsx,jdbcType=VARCHAR})
+  </insert>
+
+
+  <insert id="insertSelective" parameterType="com.jk.model.Sjn.TianBao" >
+    insert into sjn_sc
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sheng != null" >
+        sheng,
+      </if>
+      <if test="shi != null" >
+        shi,
+      </if>
+      <if test="qu != null" >
+        qu,
+      </if>
+      <if test="company != null" >
+        company,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="wdtb != null" >
+        wdtb,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sheng != null" >
+        #{sheng,jdbcType=VARCHAR},
+      </if>
+      <if test="shi != null" >
+        #{shi,jdbcType=VARCHAR},
+      </if>
+      <if test="qu != null" >
+        #{qu,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="wdtb != null" >
+        #{wdtb,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jk.model.Sjn.TianBao" >
+    update sjn_sc
+    <set >
+      <if test="sheng != null" >
+        sheng = #{sheng,jdbcType=VARCHAR},
+      </if>
+      <if test="shi != null" >
+        shi = #{shi,jdbcType=VARCHAR},
+      </if>
+      <if test="qu != null" >
+        qu = #{qu,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="wdtb != null" >
+        wdtb = #{wdtb,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jk.model.Sjn.TianBao" >
+    update sjn_sc
+    set sheng = #{sheng,jdbcType=VARCHAR},
+      shi = #{shi,jdbcType=VARCHAR},
+      qu = #{qu,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      wdtb = #{wdtb,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

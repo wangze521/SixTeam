@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="provider_xmy" />
+        <module name="provider_lpb" />
+        <module name="provider_lmy" />
+        <module name="sixteam" />
+        <module name="provider_fwt" />
+        <module name="provider_wz" />
+        <module name="provider_sjn" />
+        <module name="management" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="management" options="-parameters" />
+      <module name="provider_fwt" options="-parameters" />
+      <module name="provider_lmy" options="-parameters" />
+      <module name="provider_lpb" options="-parameters" />
+      <module name="provider_sjn" options="-parameters" />
+      <module name="provider_wz" options="-parameters" />
+      <module name="provider_xmy" options="-parameters" />
+    </option>
+  </component>
+</project>

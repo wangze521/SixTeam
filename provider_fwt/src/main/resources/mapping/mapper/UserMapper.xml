@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.mapper.FwtMapper" >
+
+
+  <select id="queryUserName" resultType="com.jk.model.fwt.UserBean">
+        select * from login_user u where u.uname = #{uname}
+  </select>
+
+    <select id="findUserCount" resultType="int">
+        select count(*) from fwt_people p left join fwt_dept d on p.deptId = d.deptId
+        <include refid="userWhere"></include>
+    </select>
+
+    <select id="findUserList"  resultType="com.jk.model.fwt.UserBean">
+        select p.peopleId,p.peopleName,p.peopleNum,p.email,p.addTime,d.deptName from fwt_people p left join fwt_dept d on p.deptId = d.deptId
+            <include refid="userWhere"></include>
+         limit #{start},#{rows}
+    </select>
+
+    <select id="findDeptList" resultType="com.jk.model.fwt.DeptBean">
+        select * from fwt_dept d
+    </select>
+    <sql id="userWhere">
+        <where>
+            <if test="user.peopleName!=null and user.peopleName!=''">
+                and p.peopleName like '%${user.peopleName}%'
+            </if>
+            <if test="user.deptId!=null and user.deptId!=''">
+                and p.deptId = #{user.deptId}
+            </if>
+        </where>
+
+    </sql>
+
+    <insert id="addUser" parameterType="com.jk.model.fwt.UserBean">
+        insert into fwt_people (peopleNum,peopleName,email,deptId,adminPassword,addTime)values
+        (#{peopleNum},#{peopleName},#{email},#{deptId},#{adminPassword},sysdate())
+    </insert>
+
+    <delete id="deleteUserByIds">
+        delete from fwt_people  where peopleId = #{peopleId}
+    </delete>
+
+    <select id="queryById" parameterType="int" resultType="com.jk.model.fwt.UserBean">
+        select * from fwt_people where  peopleId = #{peopleId}
+    </select>
+
+    <update id="updateUser" parameterType="com.jk.model.fwt.UserBean">
+        update fwt_people p set p.peopleNum =#{peopleNum},p.peopleName=#{peopleName},p.email=#{email},p.adminPassword=#{adminPassword},p.deptId=#{deptId} p.addTime=#{addTime} where p.peopleId = #{peopleId}
+    </update>
+</mapper>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/jquery.min.js"></script>
+
+    <!-- bootstrap 核心js文件 -->
+    <script src="../js/bootstrap/js/bootstrap.min.js"></script>
+    <!-- bootStrap TreeView -->
+    <script src="../js/bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+    <!-- bootStrap addTabs -->
+    <script src="../js/bootStrap-addTabs/bootstrap.addtabs.js"></script>
+
+    <!-- bootStrap table -->
+    <script src="../js/bootstrap-table/dist/bootstrap-table.js"></script>
+    <!-- bootStrap table 语言包中文-->
+    <script src="../js/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js"></script>
+
+    <!-- bootstrap-datetimepicker -->
+    <script src="../js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script src="../js/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+    <!-- bootstrap-dialog -->
+    <script src="../js/bootstrap-dialog/dist/js/bootstrap-dialog.js"></script>
+    <!-- bootstrap-fileinput -->
+    <script src="../js/bootstrap-fileinput/js/fileinput.js"></script>
+    <script src="../js/bootstrap-fileinput/js/locales/zh.js"></script>
+
+    <!-- Bootstrap 插件 css -->
+    <link href="../js/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+    <!-- Bootstrap 核心css -->
+    <link href="../js/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap TreeView css -->
+    <link href="../js/bootstrap-treeview/dist/bootstrap-treeview.min.css" rel="stylesheet">
+    <!-- Bootstrap addTabs css -->
+    <link href="../js/bootStrap-addTabs/bootstrap.addtabs.css" rel="stylesheet">
+
+    <!-- Bootstrap table css -->
+    <link href="../js/bootstrap-table/dist/bootstrap-table.css" rel="stylesheet">
+    <!-- bootstrap-datetimepicker css -->
+    <link href="../js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet">
+
+    <!-- bootstrap-dialog css -->
+    <link href="../js/bootstrap-dialog/dist/css/bootstrap-dialog.css" rel="stylesheet">
+    <!-- bootstrap-fileinput css -->
+    <link href="../js/bootstrap-fileinput/css/fileinput.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-lg-3 column">
+            <center><font  size="8px"><b>金科物流</b></font></center>
+        </div>
+        <div class="col-lg-9 column">
+            <center><font  size="8px"><b>物流审核管理中心</b></font></center>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-lg-3 column">
+            <div id="sync"> </div>
+        </div>
+        <div class="col-lg-9 column">
+            <ul id="myTab" class="nav nav-tabs">
+                <li >
+                    <a href="#home" data-toggle="tab"> 首页</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+<script>
+
+    function queryTree(){
+        var datas = "";
+        $.ajax({
+            url:"../management/sync",
+            type:"post",
+            async:false,
+            success:function(node){
+                datas = node;
+            },
+        })
+        return datas;
+    }
+
+    $(function(){
+        $("#sync").treeview({
+            data:queryTree(),
+            onNodeSelected:function(event,node){
+                $.ajax({
+                    url:"../"+node.href,
+                    success:function(info){
+
+                        $.addtabs.add({
+                            id:node.id,
+                            title:node.text,
+                            content:info,
+
+                        })
+
+                    }
+
+
+                })
+
+
+
+            }
+        })
+    })
+
+
+
+</script>
+</html>

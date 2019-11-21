@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.mapper.DeptBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.jk.model.fwt.DeptBean" >
+    <id column="deptId" property="deptid" jdbcType="INTEGER" />
+    <result column="deptName" property="deptname" jdbcType="VARCHAR" />
+    <result column="deptShow" property="deptshow" jdbcType="VARCHAR" />
+    <result column="deptCount" property="deptcount" jdbcType="VARCHAR" />
+    <result column="deptTime" property="depttime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    deptId, deptName, deptShow, deptCount, deptTime
+  </sql>
+  <select id="findDeptList" resultType="com.jk.model.fwt.DeptBean" >
+    select * from fwt_dept
+  </select>
+
+  <select id="findDeptCount" resultType="int">
+    select count(*) from fwt_dept
+  </select>
+
+  <select id="findsDeptList" resultType="com.jk.model.fwt.DeptBean">
+     select d.*,count(deptName) as deptCount from  fwt_people p left join fwt_dept d  on p.deptId = d.deptId group by d.deptId
+        limit #{start},#{rows}
+  </select>
+
+
+  <delete id="deleteDeptByIds">
+        delete from fwt_dept  where deptId = #{deptId}
+    </delete>
+
+  <insert id="adddept" parameterType="com.jk.model.fwt.DeptBean">
+        insert into fwt_dept (deptName,deptShow)values
+        (#{deptName},#{deptShow})
+    </insert>
+
+  <select id="queryDeptById" parameterType="int" resultType="com.jk.model.fwt.DeptBean">
+        select * from fwt_dept where  deptId = #{deptId}
+    </select>
+
+  <update id="updatedept" parameterType="com.jk.model.fwt.DeptBean">
+        update fwt_dept d set d.deptName=#{deptName},d.deptShow = #{deptShow} where d.deptId = #{deptId}
+    </update>
+
+
+</mapper>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>$Title$</title>
+    <!-- bootstrap 核心js文件 -->
+    <script src="../js/bootstrap/js/bootstrap.min.js"></script>
+    <!-- bootStrap TreeView -->
+    <script src="../js/bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+    <!-- bootStrap addTabs -->
+    <script src="../js/bootStrap-addTabs/bootstrap.addtabs.js"></script>
+
+    <!-- bootStrap table -->
+    <script src="../js/bootstrap-table/dist/bootstrap-table.js"></script>
+    <!-- bootStrap table 语言包中文-->
+    <script src="../js/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js"></script>
+
+    <!-- bootstrap-datetimepicker -->
+    <script src="../js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script src="../js/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+    <!-- bootstrap-dialog -->
+    <script src="../js/bootstrap-dialog/dist/js/bootstrap-dialog.js"></script>
+    <!-- bootstrap-fileinput -->
+    <script src="../js/bootstrap-fileinput/js/fileinput.js"></script>
+    <script src="../js/bootstrap-fileinput/js/locales/zh.js"></script>
+
+    <!-- Bootstrap 插件 css -->
+    <link href="../js/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+    <!-- Bootstrap 核心css -->
+    <link href="../js/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap TreeView css -->
+    <link href="../js/bootstrap-treeview/dist/bootstrap-treeview.min.css" rel="stylesheet">
+    <!-- Bootstrap addTabs css -->
+    <link href="../js/bootStrap-addTabs/bootstrap.addtabs.css" rel="stylesheet">
+
+    <!-- Bootstrap table css -->
+    <link href="../js/bootstrap-table/dist/bootstrap-table.css" rel="stylesheet">
+    <!-- bootstrap-datetimepicker css -->
+    <link href="../js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet">
+
+    <!-- bootstrap-dialog css -->
+    <link href="../js/bootstrap-dialog/dist/css/bootstrap-dialog.css" rel="stylesheet">
+    <!-- bootstrap-fileinput css -->
+    <link href="../js/bootstrap-fileinput/css/fileinput.css" rel="stylesheet">
+</head>
+<body>
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            修改用户信息
+        </h3>
+    </div>
+</div>
+
+
+
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-2 column">
+        </div>
+        <div class="col-md-5 column">
+            <form  id="upda" role="form">
+
+                <input id="aa" name="uid" th:value="${session.id}"  hidden>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">账号</label>
+                    <input type="text" name="uname" class="form-control" id="platformname" />
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">密码</label>
+                    <input type="text" name="upassword" class="form-control" id="platformprw" />
+                </div>
+            </form>
+            <button type="submit" onclick="Lpnadd()"  class="btn btn-default">提交</button>
+
+        </div>
+        <div class="col-md-2 column">
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+<script>
+
+    $(function (){
+        xuan();
+
+    })
+   function xuan(){
+
+        var id=$("#aa").val();
+
+        $.ajax({
+         url:'../Lpbquerylogin',
+         data:{id:id},
+            success:function(data){
+
+
+                $("#platformname").val(data.uname);
+
+                $("#platformprw").val(data.upassword);
+            }
+        })
+
+    }
+    function Lpnadd(){
+
+
+
+        $.ajax({
+            url:"../Lpbadd",
+            data:$("#upda").serialize(),
+            success:function(){
+
+                alert("账户信息修改成功 请从新登陆")
+
+           location.href="../page/index";
+
+            }
+
+        })
+
+
+    }
+
+
+
+
+
+
+</script>
+
+</html>

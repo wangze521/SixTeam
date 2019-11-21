@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.mapper.LoginUserMapper" >
+  <resultMap id="BaseResultMap" type="com.jk.model.LoginUser" >
+    <id column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="uname" property="uname" jdbcType="VARCHAR" />
+    <result column="upassword" property="upassword" jdbcType="VARCHAR" />
+    <result column="dateTime" property="dateTime" jdbcType="DATE" />
+  </resultMap>
+
+  <select id="findUserList" resultType="com.jk.model.LoginUser">
+    select * from login_user
+  </select>
+
+  <select id="queryUserAll" resultType="java.util.LinkedHashMap">
+    select COUNT(*) count,DATE_FORMAT(dateTime,'%Y-%m') time  from login_user GROUP BY DATE_FORMAT(dateTime,'%Y-%m')
+  </select>
+
+</mapper>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- bootstrap 核心js文件 -->
+    <script src="../js/bootstrap/js/bootstrap.min.js"></script>
+    <!-- bootStrap TreeView -->
+    <script src="../js/bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+    <!-- bootStrap addTabs -->
+    <script src="../js/bootStrap-addTabs/bootstrap.addtabs.js"></script>
+
+    <!-- bootStrap table -->
+    <script src="../js/bootstrap-table/dist/bootstrap-table.js"></script>
+    <!-- bootStrap table 语言包中文-->
+    <script src="../js/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js"></script>
+
+    <!-- bootstrap-datetimepicker -->
+    <script src="../js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script src="../js/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+    <!-- bootstrap-dialog -->
+    <script src="../js/bootstrap-dialog/dist/js/bootstrap-dialog.js"></script>
+    <!-- bootstrap-fileinput -->
+    <script src="../js/bootstrap-fileinput/js/fileinput.js"></script>
+    <script src="../js/bootstrap-fileinput/js/locales/zh.js"></script>
+
+    <!-- Bootstrap 插件 css -->
+    <link href="../js/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+    <!-- Bootstrap 核心css -->
+    <link href="../js/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap TreeView css -->
+    <link href="../js/bootstrap-treeview/dist/bootstrap-treeview.min.css" rel="stylesheet">
+    <!-- Bootstrap addTabs css -->
+    <link href="../js/bootStrap-addTabs/bootstrap.addtabs.css" rel="stylesheet">
+
+    <!-- Bootstrap table css -->
+    <link href="../js/bootstrap-table/dist/bootstrap-table.css" rel="stylesheet">
+    <!-- bootstrap-datetimepicker css -->
+    <link href="../js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet">
+
+    <!-- bootstrap-dialog css -->
+    <link href="../js/bootstrap-dialog/dist/css/bootstrap-dialog.css" rel="stylesheet">
+    <!-- bootstrap-fileinput css -->
+    <link href="../js/bootstrap-fileinput/css/fileinput.css" rel="stylesheet">
+</head>
+<body>
+
+<br>
+<div class="container-fluid">
+    <form id="myForm">
+
+        <div class="col-md-3">
+            <label for="name">企业名称</label>
+        </div>
+        <div class="col-md-3">
+            <input type="text"style="border-top:0;border-left:0;border-right:0;" class="form-control" name="company" id="name" placeholder="请输入企业名称" >
+        </div>
+
+
+
+        <div class="col-md-3">
+            <label for="name">注册资本</label>
+        </div>
+        <div class="col-md-3">
+            <input type="text"style="border-top:0;border-left:0;border-right:0;" class="form-control" name="price" id="name" placeholder="请输入注册资金" >
+        </div>
+        <br><br><br>
+
+        <div class="col-md-3">
+            <label for="name">注册地址</label>
+        </div>
+
+        <div class="col-md-3 column">
+            <select class="form-control" id="a" name="sheng" onchange="getshi(this.value)">
+
+            </select>
+
+        </div>
+        <div class="col-md-3 column">
+            <select class="form-control" id="b" name="shi" onchange="getqu(this.value)">
+
+            </select>
+
+        </div>
+        <div class="col-md-3 column">
+            <select class="form-control" name="qu" id="c">
+
+            </select>
+        </div>
+
+            <br><br><br>
+
+        <div class="col-md-3">
+            <label for="name">注册时间</label>
+        </div>
+        <div class="col-md-3">
+            <input type="date"style="border-top:0;border-left:0;border-right:0;" class="form-control" name="sdate" id="name" placeholder="请输入企业名称" >
+        </div>
+
+        <div class="col-md-3">
+            <label for="name">公司类型</label>
+        </div>
+        <div class="col-md-3">
+            <select name="stype" class="form-control">
+                <option value="0">--请选择--</option>
+                <option value="1">运输型</option>
+                <option value="2">仓储型</option>
+                <option value="3">综合服务型</option>
+            </select>
+        </div>
+
+        <br><br><br>
+        <div class="col-md-3">
+            <label for="name">场地面积</label>
+        </div>
+        <div class="col-md-3">
+            <input type="type"style="border-top:0;border-left:0;border-right:0;" class="form-control" name="mianji"  placeholder="请输入场地面积" >
+        </div>
+
+        <div class="col-md-3">
+            <label for="name">话务员</label>
+        </div>
+        <div class="col-md-3">
+            <input type="type"style="border-top:0;border-left:0;border-right:0;" class="form-control" name="hwy"  placeholder="请输入姓名" >
+        </div>
+
+        <br><br><br>
+
+        <div class="col-md-3">
+            <label for="name">法人信息</label>
+        </div>
+        <div class="col-md-3">
+            <input type="type"style="border-top:0;border-left:0;border-right:0;" class="form-control" name="far"  placeholder="请输入法人代表" >
+        </div>
+        <div class="col-md-3">
+            <label for="name">法人身份证</label>
+        </div>
+        <div class="col-md-3">
+            <input type="type"style="border-top:0;border-left:0;border-right:0;" class="form-control" name="farsfz"  placeholder="请输入有效证件号" >
+        </div>
+        <br><br><br>
+
+
+        <div class="col-md-3">
+            <label for="name">办公人员</label>
+        </div>
+        <div class="col-md-3">
+            <input type="type"style="border-top:0;border-left:0;border-right:0;" class="form-control" name="bgry"  placeholder="请输入姓名" >
+        </div>
+
+        <div class="col-md-3">
+            <label for="name">场地属性</label>
+        </div>
+        <div class="col-md-3">
+            <select name="cdsx" class="form-control">
+                <option value="0">--请选择--</option>
+                <option value="1">租赁</option>
+                <option value="2">自有</option>
+
+            </select>
+        </div>
+
+
+            <div class="col-md-6">
+                <button type="button" class="btn btn-primary" onclick="adda()" data-dismiss="modal">提交</button>
+            </div>
+
+
+    </form>
+</div>
+
+
+</body>
+<script>
+
+    $(function () {
+        querySheng()
+    })
+
+    function adda(){
+        $.ajax({
+
+            url:"../sjn/add",
+
+            data:$('#myForm').serialize(),
+
+            success:function(){
+
+                document.getElementById("myForm").reset();
+
+
+            },error:function(){
+
+                alert("失败")
+            }
+
+
+        })
+
+
+
+    }
+
+
+
+    function querySheng() {
+
+        $.ajax({
+
+            url:'../sjn/querySheng',
+
+            data:null,
+
+            success:function(data){
+
+                var str = "<option>--请选择--<option>";
+
+                for(var i=0;i<data.length;i++){
+
+                    str+="<option value='"+data[i].id+"'>"+data[i].sname+"<option>"
+
+                }
+                $("#a").html(str);
+
+            }
+
+        })
+
+
+
+    }
+    getshi = function(pid){
+
+        $.ajax({
+
+            url:"../sjn/getshi?pid="+pid,
+
+            success:function(data){
+                var op = "<option value='0'>--请选择--</option>";
+                for(var i=0;i<data.length;i++){
+
+                    op+="<option value='"+data[i].id+"'>"+data[i].hname+"</option>";
+                }
+
+                $("#b").html(op);
+            },
+            error:function(){
+
+                alert("失败");
+            }
+        })
+    }
+    getqu = function(pid){
+
+        $.ajax({
+
+            url:"../sjn/getqu?pid="+pid,
+
+            success:function(data){
+                var op = "<option value='0'>--请选择--</option>";
+                for(var i=0;i<data.length;i++){
+
+                    op+="<option value='"+data[i].id+"'>"+data[i].qname+"</option>";
+                }
+
+                $("#c").html(op);
+            },
+            error:function(){
+
+                alert("失败");
+            }
+        })
+    }
+
+
+
+
+
+</script>
+</html>

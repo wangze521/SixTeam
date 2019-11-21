@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="../js/jquery.min.js"></script>
+
+    <!-- bootstrap 核心js文件 -->
+    <script src="../js/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- bootStrap addTabs -->
+    <script src="../js/bootStrap-addTabs/bootstrap.addtabs.js"></script>
+
+    <!-- bootStrap table -->
+    <script src="../js/bootstrap-table/dist/bootstrap-table.js"></script>
+    <!-- bootStrap table 语言包中文-->
+    <script src="../js/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js"></script>
+
+    <!-- bootstrap-datetimepicker -->
+    <script src="../js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script src="../js/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+    <!-- bootstrap-dialog -->
+    <script src="../js/bootstrap-dialog/dist/js/bootstrap-dialog.js"></script>
+    <!-- bootstrap-fileinput -->
+    <script src="../js/bootstrap-fileinput/js/fileinput.js"></script>
+    <script src="../js/bootstrap-fileinput/js/locales/zh.js"></script>
+
+    <!-- Bootstrap 插件 css -->
+    <link href="../js/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+    <!-- Bootstrap 核心css -->
+    <link href="../js/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap TreeView css -->
+    <link href="../js/bootstrap-treeview/dist/bootstrap-treeview.min.css" rel="stylesheet">
+    <!-- Bootstrap addTabs css -->
+    <link href="../js/bootStrap-addTabs/bootstrap.addtabs.css" rel="stylesheet">
+
+    <!-- Bootstrap table css -->
+    <link href="../js/bootstrap-table/dist/bootstrap-table.css" rel="stylesheet">
+    <!-- bootstrap-datetimepicker css -->
+    <link href="../js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet">
+
+    <!-- bootstrap-dialog css -->
+    <link href="../js/bootstrap-dialog/dist/css/bootstrap-dialog.css" rel="stylesheet">
+    <!-- bootstrap-fileinput css -->
+    <link href="../js/bootstrap-fileinput/css/fileinput.css" rel="stylesheet">
+    <script src="../js/bootstrap-bootbox/bootbox.js"></script>
+
+
+</head>
+<body>
+
+<div
+        style="width:1357px;height:40px;background-color:#9999cc">
+    <font size="" color="">基本信息</font>
+</div><br><br>
+
+</div>
+
+<form class="form-horizontal" id="saveForm">
+
+    <input type="hidden" name="id" id="id" />
+    <div class="form-group">
+        <label for="platformname" class="col-sm-2 control-label" >平台名称</label>
+        <div class="col-sm-8">
+            <input type="text" name="platformname" id="platformname" class="form-control" placeholder="请输入平台名称" />
+        </div>
+
+    </div>
+
+
+    <div class="form-group">
+        <label for="platformheadline" class="col-sm-2 control-label">平台标题</label>
+        <div class="col-sm-8">
+            <input type="text" name="platformheadline" id="platformheadline" class="form-control" placeholder="请输入平台标题" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="platformdescription" class="col-sm-2 control-label">平台描述</label>
+        <div class="col-sm-8">
+            <input type="text" name="platformdescription" id="platformdescription" class="form-control" placeholder="平台描述" />
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label for="keyword" class="col-sm-2 control-label">关键词</label>
+        <div class="col-sm-8">
+            <input type="text" name="keyword" id="keyword" class="form-control" placeholder="关键词" />
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="col-sm-1 control-label">平台Logo</label>
+        <div class="col-sm-9">
+            <input type="file" class="projectfile" accept="image/*" name="file" id="fileInput">
+            <input type="text" style="display: none;" name="platformlogd" id="hideImg">
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label for="customerhotline" class="col-sm-2 control-label">客户热线</label>
+        <div class="col-sm-8">
+            <input type="text" name="customerhotline" id="customerhotline" class="form-control" placeholder="客户热线" />
+        </div>
+    </div>
+
+
+
+
+    <div class="form-group">
+        <label for="customermailbox" class="col-sm-2 control-label">客户邮箱</label>
+        <div class="col-sm-8">
+            <input type="text" name="customermailbox" id="customermailbox" class="form-control" placeholder="客户邮箱" />
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label for="configuration" class="col-sm-2 control-label">配置说明</label>
+        <textarea class="col-sm-7" rows="3" cols="4" name="configuration"></textarea>
+
+    </div>
+
+
+    <input type="button" value="新增" onclick="add()">
+
+</form>
+
+
+
+
+</body>
+
+<script>
+
+    $(function(){
+
+        initFileInput();
+
+    })
+
+    function add(){
+        var data = $("#saveForm").serialize()
+        $.ajax({
+            url : "../url/addInstall",
+            type : "post",
+            data : data,
+            success : function(data) {
+                //  location.href="../list.jsp"
+                alert("新增成功 ")
+
+
+            },
+            error : function() {
+                //    $("#saveForm").form("reset")
+                saveForm();
+                alert("操作失败")
+            }
+        });
+
+    }
+
+
+
+
+
+    function initFileInput(){
+        $("#fileInput").fileinput({
+            language: 'zh', //设置语言
+            uploadUrl: '../url/upload', //上传的地址
+            allowedFileExtensions: ['jpg', 'gif', 'png'],//接收的文件后缀
+            showUpload: true, //是否显示上传按钮
+            showCaption: false,//是否显示标题
+            browseClass: "btn btn-primary", //按钮样式
+            maxFileCount: 2, //表示允许同时上传的最大文件个数
+            enctype: 'multipart/form-data',
+            validateInitialCount:true,
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+            msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+
+        }).on('fileuploaded', function(event, data, previewId, index) {
+            var imgval = "http://<%= request.getServerName()%>:<%=request.getServerPort()%><%=request.getContextPath()%>/"+data.response.img;
+            $('#hideImg').val(imgval);
+        });
+    }
+
+
+
+</script>
+
+
+
+
+
+
+
+
+</html>

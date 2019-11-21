@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container-fluid">
+    <form id="deptForm">
+        <div class="row">
+            <div class="col-md-2">
+                <label for="deptName">部门名称</label>
+            </div>
+            <div class="col-md-10">
+                <input type="hidden" name="deptId" th:value="${dept.deptId}">
+                <input type="text" class="form-control" name="deptName" id="deptName" placeholder="请输入部门名称" th:value="${dept.deptName}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label for="deptShow">职能描述</label>
+            </div>
+            <div class="col-md-10">
+                <textarea class="form-control" name="deptShow" id="deptShow" rows="3" placeholder="请输入职能描述" th:value="${dept.deptShow}"></textarea>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
